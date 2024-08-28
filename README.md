@@ -1,4 +1,4 @@
-- Để chạy file cần tải thêm ứng dụng mongodb theo đường dẫn
+- Để chạy file cần tải thêm ứng dụng mongodb theo đường dẫn : https://www.mongodb.com/try/download/shell
 
 - Lệnh chạy file: npm start
 - Lệnh tạo nhánh cho thành viên nhóm trên github: git checkout -b feature/your-feature-name
