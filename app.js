@@ -38,9 +38,10 @@ app.use('/orders', orderRouter);
 app.use('/categories', categoryRouter);
 app.use('/auth', authRouter);
 
-app.get('/', (req, res) => {
-  res.redirect('/auth/login'); // Chuyển hướng đến trang login
-});
+//Thanh điều hướng
+// app.get('/', (req, res) => {
+//   res.redirect('/auth/login'); // Chuyển hướng đến trang login
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
