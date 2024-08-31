@@ -4,9 +4,15 @@
 - Lệnh tạo nhánh cho thành viên nhóm trên github: git checkout -b feature/your-feature-name
 - tải code về laptop của nhóm : git clone <URL>
 - Cập Nhật Nhánh của Bạn:
+<<<<<<< HEAD
 + Nếu bạn đang làm việc trên một nhánh khác, hãy chuyển sang nhánh đó hoặc trở về nhánh chính:
   * git checkout feature/your-feature-name
   * git check master
+=======
++ Nếu bạn đang làm việc trên một nhánh khác, hãy chuyển sang nhánh đó hoặc trở về nhánh chính:
+  * git checkout feature/your-feature-name
+  * git checkout master
+>>>>>>> feature/Duc
 
 - Hợp Nhánh Tính Năng vào Nhánh Chính
  + Giả sử bạn có một nhánh tính năng (ví dụ: feature/login-page) mà bạn muốn hợp vào nhánh main. Chạy lệnh sau:
