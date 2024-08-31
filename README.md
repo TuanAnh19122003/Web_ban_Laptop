@@ -4,7 +4,7 @@
 - Lệnh tạo nhánh cho thành viên nhóm trên github: git checkout -b feature/your-feature-name
 
 - Cập Nhật Nhánh của Bạn:
-+ Nếu bạn đang làm việc trên một nhánh khác, hãy chuyển sang nhánh đó hoặc chuyển về nhánh chính:
++ Nếu bạn đang làm việc trên một nhánh khác, hãy chuyển sang nhánh đó hoặc trở về nhánh chính:
   * git checkout feature/your-feature-name
   * git checkout master
 
