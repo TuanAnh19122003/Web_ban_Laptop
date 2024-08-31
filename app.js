@@ -9,11 +9,13 @@ const path = require('path');
 const productsRouter = require('./routes/products')
 const userRouter = require('./routes/users')
 const orderRouter = require('./routes/orders')
+const categoryRouter = require('./routes/categories')
+const authRouter = require('./routes/auth')
 
 const app = express();
 
 // Kết nối với MongoDB
-mongoose.connect('mongodb://localhost/Web_ban_hang');
+mongoose.connect('mongodb://localhost/Web_ban_Laptop');
 
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
@@ -33,6 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/products', productsRouter);
 app.use('/users', userRouter);
 app.use('/orders', orderRouter);
+app.use('/categories', categoryRouter);
+app.use('/auth', authRouter);
+
+app.get('/', (req, res) => {
+  res.redirect('/auth/login'); // Chuyển hướng đến trang login
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
