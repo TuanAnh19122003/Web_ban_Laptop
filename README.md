@@ -7,7 +7,7 @@
 <<<<<<< HEAD
 + Nếu bạn đang làm việc trên một nhánh khác, hãy chuyển sang nhánh đó hoặc trở về nhánh chính:
   * git checkout feature/your-feature-name
-  * git check master
+  * git checkout master
 =======
 + Nếu bạn đang làm việc trên một nhánh khác, hãy chuyển sang nhánh đó hoặc trở về nhánh chính:
   * git checkout feature/your-feature-name
