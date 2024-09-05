@@ -1,49 +1,102 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 const Product = require('../models/product');
 const ProductDetail = require('../models/productDetail');
 
+// Cấu hình multer để lưu trữ ảnh
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Tạo tên duy nhất cho ảnh
+    }
+});
+
+const upload = multer({ storage });
+
 // Lấy tất cả sản phẩm và chi tiết của chúng
-router.get('/', async (req, res) => {
+router.get('/list', async (req, res) => {
     try {
         const products = await Product.find();
         const productDetails = await ProductDetail.find().populate('productId');
-        res.json({ products, productDetails });
+        res.render('product/list', { products, productDetails }); // Render file list.ejs và truyền dữ liệu users vào
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// Thêm sản phẩm mới
-router.post('/', async (req, res) => {
-    const { name, price, category, brand, imageUrl, description, specifications } = req.body;
+router.get('/details/:id', async (req, res) => {
     try {
-        const product = new Product({ name, price, category, brand, imageUrl });
-        await product.save();
+        const product = await Product.findById(req.params.id);
+        const productDetail = await ProductDetail.findOne({ productId: req.params.id });
+        if (!product || !productDetail) return res.status(404).send('Product not found');
+        res.render('product/details', { product, productDetail });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
+
+router.get('/create', (req, res) => {
+    res.render('product/create'); // Render file create.ejs
+});
+
+// Thêm sản phẩm mới
+router.post('/create', upload.single('image'), async (req, res) => {
+    const { name, price, category, brand, description, specifications } = req.body;
+    const imageUrl = req.file ? `uploads/${req.file.filename}` : null; // Lấy đường dẫn của ảnh
+
+    try {
+        const products = new Product({ name, price, category, brand, imageUrl });
+        await products.save();
 
         const productDetail = new ProductDetail({
-            productId: product._id,
+            productId: products._id,
             description,
             specifications
         });
         await productDetail.save();
 
-        res.status(201).json({ product, productDetail });
+        res.redirect('/products/list')
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
+
 // Cập nhật thông tin sản phẩm
-router.patch('/:id', async (req, res) => {
-    const { id } = req.params;
-    const { name, price, category, brand, imageUrl, description, specifications } = req.body;
+router.get('/edit/:id', async (req, res) => {
     try {
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).send('Product not found');
+        
+        // Lấy chi tiết sản phẩm
+        const productDetail = await ProductDetail.findOne({ productId: req.params.id });
+
+        res.render('product/edit', { product, productDetail });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
+
+router.post('/edit/:id', upload.single('image'), async (req, res) => {
+    const { id } = req.params;
+    const { name, price, category, brand, description, specifications } = req.body;
+    let imageUrl = req.file ? `uploads/${req.file.filename}` : undefined; // Đảm bảo đường
+
+    try {
+        const updateData = { name, price, category, brand };
+        if (imageUrl) updateData.imageUrl = imageUrl; // Cập nhật ảnh nếu có
+
         // Cập nhật sản phẩm
         const product = await Product.findByIdAndUpdate(
             id,
-            { name, price, category, brand, imageUrl },
-            { new: true, runValidators: true } // Return the updated document and run validators
+            updateData,
+            { new: true, runValidators: true }
         );
 
         if (!product) return res.status(404).json({ message: 'Product not found' });
@@ -52,17 +105,27 @@ router.patch('/:id', async (req, res) => {
         const productDetail = await ProductDetail.findOneAndUpdate(
             { productId: id },
             { description, specifications },
-            { new: true, runValidators: true } // Return the updated document and run validators
+            { new: true, runValidators: true }
         );
 
-        res.json({ product, productDetail });
+        res.redirect('/products/list');
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
 // Xóa thông tin sản phẩm
-router.delete('/:id', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).send('User not found');
+        res.render('product/delete', { product });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
+router.post('/delete/:id', async (req, res) => {
     const { id } = req.params;
     try {
         // Xóa chi tiết sản phẩm
@@ -72,7 +135,7 @@ router.delete('/:id', async (req, res) => {
         const product = await Product.findByIdAndDelete(id);
         if (!product) return res.status(404).json({ message: 'Product not found' });
 
-        res.json({ message: 'Product deleted successfully' });
+        res.redirect('/products/list');
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

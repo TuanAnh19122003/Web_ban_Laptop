@@ -5,13 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xóa Người Dùng</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Xác Nhận Xóa</h1>
-    <p>Bạn có chắc chắn muốn xóa người dùng <strong><%= user.name %> - <%= user.password %> - <%= user.email %> - <%= user.address %></strong> không?</p>
-    <form action="/users/delete/<%= user._id %>" method="POST" style="display:inline;">
-        <button type="submit">Xóa</button>
-    </form>
-    <a href="/users/list">Quay lại danh sách người dùng</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="my-4 text-center">Xác Nhận Xóa Người Dùng</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <p>Bạn có chắc chắn muốn xóa người dùng <strong><%= user.name %></strong> không?</p>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>ID:</strong> <%= user._id %></li>
+                            <li class="list-group-item"><strong>Email:</strong> <%= user.email %></li>
+                            <li class="list-group-item"><strong>Password:</strong> <%= user.password %></li>
+                            <li class="list-group-item"><strong>Địa chỉ:</strong> <%= user.address %></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center">
+                        <form action="/users/delete/<%= user._id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                        <a href="/users/list" class="btn btn-secondary ml-2">Quay lại danh sách người dùng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

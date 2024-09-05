@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xóa Sản Phẩm</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .product-img {
+            width: 300px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Xác Nhận Xóa Sản Phẩm</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <% if (product.imageUrl) { %>
+                    <img src="/<%= product.imageUrl %>" alt="<%= product.name %>" class="product-img img-fluid">
+                <% } %>
+            </div>
+            <div class="col-md-8">
+                <h3><%= product.name %></h3>
+                <p><strong>Giá:</strong> <%= product.price %></p>
+                <p><strong>Danh Mục:</strong> <%= product.category %></p>
+                <p><strong>Thương Hiệu:</strong> <%= product.brand %></p>
+                <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+                <form action="/products/delete/<%= product._id %>" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+                <a href="/products/list" class="btn btn-secondary mt-3">Quay lại danh sách sản phẩm</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

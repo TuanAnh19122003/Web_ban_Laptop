@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Hiển thị trang đăng nhập
 router.get('/login', (req, res) => {
-    res.render('login'); // Render file login.ejs
+    res.render('auth/login');
 });
 
 // Xử lý đăng nhập
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
 
 // Hiển thị trang đăng ký
 router.get('/register', (req, res) => {
-    res.render('register'); // Render file register.ejs
+    res.render('auth/register'); // Render file register.ejs
 });
 
 // Xử lý đăng ký

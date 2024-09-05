@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product-img {
+            width: 300px;
+            height: auto;
+        }
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Chi Tiết Sản Phẩm</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <% if (product.imageUrl) { %>
+                    <img src="/<%= product.imageUrl %>" alt="<%= product.name %>" class="product-img img-fluid">
+                <% } %>
+            </div>
+            <div class="col-md-8">
+                <h2><%= product.name %></h2>
+                <p><strong>Giá:</strong> <%= product.price %> VNĐ</p>
+                <p><strong>Danh Mục:</strong> <%= product.category %></p>
+                <p><strong>Thương Hiệu:</strong> <%= product.brand %></p>
+                <p><strong>Mô Tả:</strong></p>
+                <p><%= productDetail.description %></p>
+                <p><strong>Thông Số Kỹ Thuật:</strong></p>
+                <ul>
+                    <% const specs = productDetail.specifications.split('\n'); %>
+                    <% specs.forEach(spec => { %>
+                        <li><%= spec %></li>
+                    <% }); %>
+                </ul>
+                <a href="/products/edit/<%= product._id %>" class="btn btn-warning">Sửa</a>
+                <a href="/products/delete/<%= product._id %>" class="btn btn-danger">Xóa</a>
+                <a href="/products/list" class="btn btn-secondary">Quay Lại</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

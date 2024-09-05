@@ -5,30 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo Người Dùng Mới</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Tạo Người Dùng Mới</h1>
-    <form action="/users/create" method="POST">
-        <div>
-            <label for="name">Tên tài khoản: </label>
-            <input type="text" name="name" required>
-        </div>
-        <div>
-            <label for="password">Mật khẩu: </label>
-            <input type="password" name="password" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
-        </div>
-        <div>
-            <label for="address">Địa chỉ: </label>
-            <input type="text" name="address" required>
-        </div>
-        <div>
-            <button type="submit">Tạo Người Dùng</button>
-        </div>
-    </form>
-    <a href="/users/list">Quay lại danh sách người dùng</a>
+    <div class="container">
+        <h1 class="my-4">Tạo Người Dùng Mới</h1>
+        <form action="/users/create" method="POST">
+            <div class="form-group">
+                <label for="name">Tên tài khoản:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ:</label>
+                <input type="text" class="form-control" name="address" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Tạo Người Dùng</button>
+        </form>
+        <a href="/users/list" class="btn btn-secondary mt-3">Quay lại danh sách người dùng</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

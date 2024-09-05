@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa Sản Phẩm</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Sửa Sản Phẩm</h1>
+        <form action="/products/edit/<%= product._id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Tên sản phẩm:</label>
+                <input type="text" class="form-control" name="name" value="<%= product.name %>" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Giá:</label>
+                <input type="number" class="form-control" name="price" value="<%= product.price %>" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Danh mục:</label>
+                <input type="text" class="form-control" name="category" value="<%= product.category %>" required>
+            </div>
+            <div class="form-group">
+                <label for="brand">Thương hiệu:</label>
+                <input type="text" class="form-control" name="brand" value="<%= product.brand %>">
+            </div>
+            <div class="form-group">
+                <label for="image">Ảnh sản phẩm:</label>
+                <input type="file" class="form-control-file" name="image" accept="image/*">
+                <% if (product.imageUrl) { %>
+                    <img src="/<%= product.imageUrl %>" alt="<%= product.name %>" class="img-fluid mt-2" style="max-width: 200px;">
+                <% } %>
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả:</label>
+                <textarea class="form-control" name="description"><%= productDetail.description %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="specifications">Thông số kỹ thuật:</label>
+                <textarea class="form-control" name="specifications"><%= productDetail.specifications %></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+        </form>
+        <a href="/products/list" class="btn btn-secondary mt-3">Quay lại danh sách sản phẩm</a>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
