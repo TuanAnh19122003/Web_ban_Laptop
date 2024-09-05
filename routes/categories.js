@@ -3,17 +3,11 @@ const path = require('path');
 const Category = require('../models/category');
 const router = express.Router();
 
-// Hiển thị trang quản lý loại sản phẩm
-// Route để gửi tệp HTML
-router.get('/manage', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/manage_categories.html'));
-});
-
-// Route API để lấy danh sách loại sản phẩm
+// Lấy tất cả sản phẩm và chi tiết của chúng
 router.get('/', async (req, res) => {
     try {
-        const categories = await Category.find();
-        res.json(categories);
+        const users = await User.find();
+        res.json({ users });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

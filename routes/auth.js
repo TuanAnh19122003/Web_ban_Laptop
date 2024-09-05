@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Hiển thị trang đăng nhập
 router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/login.html')); // Gửi file HTML tới trình duyệt
+    res.render('login'); // Render file login.ejs
 });
 
 // Xử lý đăng nhập
@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Nếu thông tin đăng nhập hợp lệ
-        res.json({ message: 'Login successful', em });
+        res.redirect('/users/list');
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
 
 // Hiển thị trang đăng ký
 router.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/register.html'));
+    res.render('register'); // Render file register.ejs
 });
 
 // Xử lý đăng ký
@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
         // Tạo người dùng mới
         const user = new User({ name, email, password, address });
         await user.save();
-        res.status(201).json({ message: 'User registered successfully', user });
+        res.redirect('/auth/login');
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

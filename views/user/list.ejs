@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Người Dùng</title>
+</head>
+<body>
+    <h1>Danh Sách Người Dùng</h1>
+    <a href="/users/create">
+        <button type="button">Thêm Người Dùng</button>
+    </a>
+    <ul>
+        <% users.forEach(function(user) { %>
+        <li><%= user.name %> - <%= user.password %> - <%= user.email %> - <%= user.address %>
+            <a href="/users/edit/<%= user._id %>">Sửa</a>
+            <a href="/users/delete/<%= user._id %>">Xóa</a>
+        </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
