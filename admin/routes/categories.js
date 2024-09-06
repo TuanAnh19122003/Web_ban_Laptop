@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const Category = require('../models/category');
+const Category = require('../../models/category');
 const router = express.Router();
 
 // Lấy tất cả sản phẩm và chi tiết của chúng

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const Product = require('../models/product');
-const ProductDetail = require('../models/productDetail');
+const Product = require('../../models/product');
+const ProductDetail = require('../../models/productDetail');
 
 // Cấu hình multer để lưu trữ ảnh
 const storage = multer.diskStorage({

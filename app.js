@@ -6,11 +6,11 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 
-const productsRouter = require('./routes/products')
-const userRouter = require('./routes/users')
-const orderRouter = require('./routes/orders')
-const categoryRouter = require('./routes/categories')
-const authRouter = require('./routes/auth')
+const productsRouter = require('./admin/routes/products')
+const userRouter = require('./admin/routes/users')
+const orderRouter = require('./admin/routes/orders')
+const categoryRouter = require('./admin/routes/categories')
+const authRouter = require('./admin/routes/auth')
 
 const app = express();
 
@@ -24,6 +24,7 @@ db.once('open', () => console.log('Connected to Database'));
 // view engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'admin/views'));
 
 app.use(logger('dev'));
 app.use(express.json());

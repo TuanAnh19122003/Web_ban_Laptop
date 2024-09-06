@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const User = require('../../models/user');
 
 
 // Lấy tất cả sản phẩm và chi tiết của chúng

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Order = require('../models/orders');
-const Product = require('../models/product'); // Import model Product để kiểm tra sản phẩm tồn tại
+const Order = require('../../models/orders');
+const Product = require('../../models/product'); // Import model Product để kiểm tra sản phẩm tồn tại
 
 // Lấy tất cả đơn hàng
 router.get('/', async (req, res) => {

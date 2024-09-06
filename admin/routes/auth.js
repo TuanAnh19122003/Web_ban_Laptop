@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path'); // Import thêm path để lấy đường dẫn tới file HTML
-const User = require('../models/user'); // Import mô hình User
+const User = require('../../models/user'); // Import mô hình User
 const router = express.Router();
 
 // Hiển thị trang đăng nhập
