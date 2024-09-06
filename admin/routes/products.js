@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const Product = require('../../models/product');
 const ProductDetail = require('../../models/productDetail');
+const Category = require('../../models/category');
 
 // Cấu hình multer để lưu trữ ảnh
 const storage = multer.diskStorage({
@@ -40,10 +41,14 @@ router.get('/details/:id', async (req, res) => {
 });
 
 
-router.get('/create', (req, res) => {
-    res.render('product/create'); // Render file create.ejs
+router.get('/create', async (req, res) => {
+    try {
+        const categories = await Category.find(); // Lấy tất cả danh mục từ cơ sở dữ liệu
+        res.render('product/create', { categories }); // Render file create.ejs và truyền danh sách danh mục vào
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 });
-
 // Thêm sản phẩm mới
 router.post('/create', upload.single('image'), async (req, res) => {
     const { name, price, category, brand, description, specifications } = req.body;
@@ -73,10 +78,11 @@ router.get('/edit/:id', async (req, res) => {
         const product = await Product.findById(req.params.id);
         if (!product) return res.status(404).send('Product not found');
         
-        // Lấy chi tiết sản phẩm
+        // Lấy chi tiết sản phẩm và loại danh mục
+        const categories = await Category.find();
         const productDetail = await ProductDetail.findOne({ productId: req.params.id });
 
-        res.render('product/edit', { product, productDetail });
+        res.render('product/edit', { product, productDetail, categories  });
     } catch (err) {
         res.status(500).send(err.message);
     }
